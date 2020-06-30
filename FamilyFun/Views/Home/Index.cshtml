@@ -1,8 +1,27 @@
-﻿@{
+﻿@using FamilyFun.Web.Models;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    
+    @{
+        IEnumerable<MenuItem> menuItems = ViewBag.MenuItems;
+    }
+
+    @foreach(MenuItem item in menuItems)
+    {
+        <article class="menu-item">
+            <a href="@item.Link">
+                <img alt="@item.Name" src="@item.ImagePath" />
+            </a>
+        </article>
+    }
+
+
+
 </div>

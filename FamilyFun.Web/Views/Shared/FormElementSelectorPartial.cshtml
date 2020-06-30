@@ -1,0 +1,19 @@
+﻿@model SelectorElement
+@{ 
+    string method = Model.ElementType == ElementType.Get ? "get" : "post";
+}
+
+    <form asp-controller="@Model.TargetController" asp-action="@Model.TargetAction" asp-route-id="@Model.TargetId" method="@method">
+        @{
+            foreach (KeyValuePair<string, string> field in Model.Attributes)
+            {
+                <input type="hidden" value="@field.Value" id="@field.Key" name="@field.Key" />
+            }
+
+            <button type="submit" style="background-color: @Model.BackgroundColor; border-color: @Model.BackgroundColor;">
+                @{
+                    await Html.RenderPartialAsync("InnerElementSelectorPartial", Model);
+                }
+            </button>
+        }
+    </form>

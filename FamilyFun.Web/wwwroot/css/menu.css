@@ -1,0 +1,32 @@
+﻿.menu-item {
+  display: inline-block;
+  margin: 15px;
+  width: 30vw;
+  height: 30vw;
+  vertical-align: middle; }
+  .menu-item a, .menu-item form {
+    height: 100%; }
+    .menu-item a a .title, .menu-item form a .title {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%); }
+    .menu-item a .title span, .menu-item form .title span {
+      font-family: Fun;
+      font-size: 6vw; }
+    .menu-item a button, .menu-item form button {
+      display: inline-block;
+      width: 100%;
+      height: 100%; }
+    .menu-item a img, .menu-item form img {
+      display: inline-block;
+      object-fit: cover;
+      width: 100%;
+      height: 100%; }
+
+@media (min-width: 1700px) {
+  .menu-item {
+    width: 520px;
+    height: 520px; }
+    .menu-item a img {
+      width: 520px;
+      height: 520px; } }

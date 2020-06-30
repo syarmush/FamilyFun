@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-FamilyFun-5C4ECCF5-4E5D-4140-A0DC-E313FB300D51</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <Nullable>Enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Activities\Create.cshtml" />
+    <Content Remove="Views\Activities\Delete.cshtml" />
+    <Content Remove="Views\Activities\Details.cshtml" />
+    <Content Remove="Views\Activities\Edit.cshtml" />
+    <Content Remove="Views\Activities\Index.cshtml" />
+    <Content Remove="Views\Families\Create.cshtml" />
+    <Content Remove="Views\Families\Delete.cshtml" />
+    <Content Remove="Views\Families\Details.cshtml" />
+    <Content Remove="Views\Families\Edit.cshtml" />
+    <Content Remove="Views\Families\Index.cshtml" />
+    <Content Remove="Views\FamilyMembers\Create.cshtml" />
+    <Content Remove="Views\FamilyMembers\Delete.cshtml" />
+    <Content Remove="Views\FamilyMembers\Details.cshtml" />
+    <Content Remove="Views\FamilyMembers\Edit.cshtml" />
+    <Content Remove="Views\FamilyMembers\Index.cshtml" />
+    <Content Remove="Views\Medicines\Create.cshtml" />
+    <Content Remove="Views\Medicines\Delete.cshtml" />
+    <Content Remove="Views\Medicines\Details.cshtml" />
+    <Content Remove="Views\Medicines\Edit.cshtml" />
+    <Content Remove="Views\Medicines\Index.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\FamilyFun.Chores\FamilyFun.Chores.csproj" />
+    <ProjectReference Include="..\FamilyFun.Families\FamilyFun.Families.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Activities\Create.cshtml" />
+    <None Include="Views\Activities\Delete.cshtml" />
+    <None Include="Views\Activities\Details.cshtml" />
+    <None Include="Views\Activities\Edit.cshtml" />
+    <None Include="Views\Activities\Index.cshtml" />
+    <None Include="Views\Families\Create.cshtml" />
+    <None Include="Views\Families\Delete.cshtml" />
+    <None Include="Views\Families\Details.cshtml" />
+    <None Include="Views\Families\Edit.cshtml" />
+    <None Include="Views\Families\Index.cshtml" />
+    <None Include="Views\FamilyMembers\Create.cshtml" />
+    <None Include="Views\FamilyMembers\Delete.cshtml" />
+    <None Include="Views\FamilyMembers\Details.cshtml" />
+    <None Include="Views\FamilyMembers\Edit.cshtml" />
+    <None Include="Views\FamilyMembers\Index.cshtml" />
+    <None Include="Views\Medicines\Create.cshtml" />
+    <None Include="Views\Medicines\Delete.cshtml" />
+    <None Include="Views\Medicines\Details.cshtml" />
+    <None Include="Views\Medicines\Edit.cshtml" />
+    <None Include="Views\Medicines\Index.cshtml" />
+  </ItemGroup>
+
+</Project>

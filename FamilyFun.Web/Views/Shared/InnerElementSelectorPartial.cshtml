@@ -1,0 +1,21 @@
+﻿@model SelectorElement
+@using System.Linq;
+
+@if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+{
+    <img alt="@Model.Name" src="@Model.ImagePath" />
+}
+else
+{
+
+    <div class="title">
+        @for (int i = 0; i < Model.TextColors.Count(); i++)
+        {
+            string textColor = Model.TextColors.ElementAt(i);
+            char charchter = Model.Name.ElementAt(i);
+            string innerValue = char.IsWhiteSpace(charchter) ? "&nbsp;" : charchter.ToString();
+
+            <span style="color: @textColor;">@Html.Raw(innerValue)</span>
+        }
+    </div>
+}

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SelectorElement>
+
+<link rel="stylesheet" type="text/css" href="~/css/menu.min.css" />
+<div class="text-center">
+
+    @foreach (SelectorElement item in Model)
+    {
+        string backgroundColor = item.BackgroundColor;
+
+    <article class="menu-item" style="background-color: @backgroundColor;">
+
+        @{
+            await Html.RenderPartialAsync("FormElementSelectorPartial", item);
+        }
+
+    </article>
+    }
+</div>

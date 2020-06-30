@@ -1,0 +1,21 @@
+﻿@using System.Linq;
+
+@{
+    Layout = "_Layout";
+
+    IEnumerable<string> pageColors = ViewBag.PageColors;
+    string bgColor1 = pageColors.First();
+    string bgColor2 = pageColors.Skip(1).First();
+    string bgColor3 = pageColors.Last();
+}
+
+<style>
+    body {
+        background: -webkit-linear-gradient(75deg, @bgColor1 30%, rgba(0,0,0,0) 30%), -webkit-linear-gradient(50deg, @bgColor2 60%, @bgColor3 60%);
+        background: -o-linear-gradient(75deg, @bgColor1 30%, rgba(0,0,0,0) 30%), -o-linear-gradient(50deg, @bgColor2 60%, @bgColor3 60%);
+        background: -moz-linear-gradient(75deg, @bgColor1 30%, rgba(0,0,0,0) 30%), -moz-linear-gradient(50deg, @bgColor2 60%, @bgColor3 60%);
+        background: linear-gradient(75deg, @bgColor1 30%, rgba(0,0,0,0) 30%), linear-gradient(50deg, @bgColor2 60%, @bgColor3 60%);
+    }
+</style>
+
+@RenderBody()

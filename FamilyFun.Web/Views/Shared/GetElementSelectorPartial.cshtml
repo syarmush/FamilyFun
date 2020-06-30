@@ -1,0 +1,7 @@
+﻿@model SelectorElement
+
+<a asp-controller="@Model.TargetController" asp-action="@Model.TargetAction" asp-route-id="@Model.TargetId">
+    @{
+        await Html.RenderPartialAsync("InnerElementSelectorPartial", Model);
+    }
+</a>

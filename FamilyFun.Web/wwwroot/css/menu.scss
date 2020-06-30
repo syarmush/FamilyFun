@@ -1,0 +1,56 @@
+﻿$image-size: 30vw;
+
+$large-screen: 1700px;
+$large-screen-image-size: 520px;
+
+.menu-item {
+    display: inline-block;
+    margin: 15px;
+    width: $image-size;
+    height: $image-size;
+    vertical-align: middle;
+
+    a, form {
+        height: 100%;
+
+        a .title {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .title {
+            span {
+                font-family: Fun;
+                font-size: 6vw;
+            }
+        }
+
+        button {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            display: inline-block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@media (min-width: $large-screen) {
+    .menu-item {
+        width: $large-screen-image-size;
+        height: $large-screen-image-size;
+
+        a {
+            img {
+                width: $large-screen-image-size;
+                height: $large-screen-image-size;
+            }
+        }
+    }
+}
