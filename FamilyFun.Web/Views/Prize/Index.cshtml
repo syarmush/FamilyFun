@@ -1,0 +1,37 @@
+﻿@model PrizeResultViewModel
+@{
+    Layout = "_ColorfulBodyLayout";
+}
+
+@Model.Member.Name
+
+@foreach (Prize a in Model.Prizes)
+        {
+            double progress = (double)Model.ApprovedPoints / (double)a.CostInPoints;
+            string imagePath = System.IO.Path.Combine(Model.ImageDirectoryPath, a.ImageFileName);
+    <div class="prize">
+        <div class="progress" data-progress="@progress">
+            <div class="bar shadow overlap"></div>
+        </div>
+        <img src="@imagePath" alt="@a.Name"/>
+    </div>
+}
+
+<script>
+    const bars = document.querySelectorAll('.bar');
+    const progress = document.querySelectorAll('.progress');
+
+    bars.forEach((bar, index) => {
+        bar.style.width = '0%';
+    });
+
+    window.onload = function () {
+        bars.forEach((bar, index) => {
+            const randomTiming = Math.floor((Math.random() * 2) + 2);
+            bar.style.transitionDuration = `${randomTiming}s`;
+            var progress = bar.parentElement.getAttribute('data-progress') * 100;
+            bar.style.width = progress + '%';
+        });
+    }
+</script>
+    <link rel="stylesheet" href="~/css/bars.css" />

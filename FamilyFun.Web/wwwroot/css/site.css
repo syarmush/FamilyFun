@@ -86,9 +86,16 @@ body {
     margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.home-svg {
+    width:10vw;
+    height:10vw;
+    z-index: 100;
+    position: relative;
 }

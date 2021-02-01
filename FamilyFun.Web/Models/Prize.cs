@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FamilyFun.Web.Models
 {
@@ -10,12 +7,14 @@ namespace FamilyFun.Web.Models
         public int Id { get; }
         public string Name { get; }
         public int CostInPoints { get; }
+        public string ImageFileName { get; }
 
-        public Prize(int id, string name, int points)
+        public Prize(int id, string memberName, int points, string imageFileName)
         {
             Id = id;
-            Name = name;
+            Name = memberName ?? throw new ArgumentNullException(nameof(memberName)); ;
             CostInPoints = points;
+            ImageFileName = imageFileName ?? throw new ArgumentNullException(nameof(imageFileName));
         }
     }
 }

@@ -2,8 +2,15 @@
 @{
     Layout = "_ColorfulBodyLayout";
 }
-<h1 class="fun">Great Job, @Model.Name.</h1>
+<h1 class="fun">Great Job, @Model.MemberName.</h1>
 <h2 class="fun">You did a Mitzvah and earned @Model.Points points!</h2>
+<h2>
+    <a asp-controller="Home" asp-action="Index" asp-route-id="@Model.MemberId" class="home-svg fun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+        </svg>
+    </a>
+</h2>
 <div id="bubbles">
     <div class="bubble x1">
         <svg width="120" height="500">
@@ -140,12 +147,19 @@
     </div>
 </div>
 <style>
-    html, body, #bubbles { height: 100% }
-    body { overflow: hidden }
-    #bubbles { padding: 100px 0 }
+    html, body, #bubbles {
+        height: 100%
+    }
+
+    body {
+        overflow: hidden
+    }
+
+    #bubbles {
+        padding: 100px 0
+    }
 
     .bubble {
-
         position: absolute;
     }
 
@@ -170,6 +184,7 @@
         -moz-animation: moveclouds 5s linear infinite, sideWays 2s ease-in-out infinite alternate;
         -o-animation: moveclouds 5s linear infinite, sideWays 2s ease-in-out infinite alternate;
     }
+
     .x3 {
         left: 11vw;
         -webkit-transform: scale(1.8);
@@ -180,6 +195,7 @@
         -moz-animation: moveclouds 10s linear infinite, sideWays 4s ease-in-out infinite alternate;
         -o-animation: moveclouds 10s linear infinite, sideWays 4s ease-in-out infinite alternate;
     }
+
     .x4 {
         left: 17vw;
         -webkit-transform: scale(1.25);
@@ -190,6 +206,7 @@
         -moz-animation: moveclouds 8s linear infinite, sideWays 3s ease-in-out infinite alternate;
         -o-animation: moveclouds 8s linear infinite, sideWays 3s ease-in-out infinite alternate;
     }
+
     .x5 {
         left: 22vw;
         -webkit-transform: scale(0.8);
@@ -200,6 +217,7 @@
         -moz-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
         -o-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
     }
+
     .x6 {
         left: 25vw;
         -webkit-transform: scale(1.5);
@@ -210,6 +228,7 @@
         -moz-animation: moveclouds 8s linear infinite, sideWays 2s ease-in-out infinite alternate;
         -o-animation: moveclouds 8s linear infinite, sideWays 2s ease-in-out infinite alternate;
     }
+
     .x7 {
         left: 35vw;
         -webkit-transform: scale(0.7);
@@ -220,6 +239,7 @@
         -moz-animation: moveclouds 9s linear infinite, sideWays 4s ease-in-out infinite alternate;
         -o-animation: moveclouds 9s linear infinite, sideWays 4s ease-in-out infinite alternate;
     }
+
     .x8 {
         left: 45vw;
         -webkit-transform: scale(0.9);
@@ -230,6 +250,7 @@
         -moz-animation: moveclouds 5s linear infinite, sideWays 3s ease-in-out infinite alternate;
         -o-animation: moveclouds 5s linear infinite, sideWays 3s ease-in-out infinite alternate;
     }
+
     .x9 {
         left: 55vw;
         -webkit-transform: scale(1);
@@ -240,6 +261,7 @@
         -moz-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
         -o-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
     }
+
     .x10 {
         left: 55vw;
         -webkit-transform: scale(0.9);
@@ -250,6 +272,7 @@
         -moz-animation: moveclouds 5s linear infinite, sideWays 2s ease-in-out infinite alternate;
         -o-animation: moveclouds 5s linear infinite, sideWays 2s ease-in-out infinite alternate;
     }
+
     .x11 {
         left: 65vw;
         -webkit-transform: scale(0.6);
@@ -348,10 +371,12 @@
         -moz-animation: moveclouds 3s linear infinite, sideWays 1s ease-in-out infinite alternate;
         -o-animation: moveclouds 3s linear infinite, sideWays 1s ease-in-out infinite alternate;
     }
+
     @@-webkit-keyframes moveclouds {
         0% {
             top: 110vh;
         }
+
         100% {
             top: -30vh;
         }
@@ -359,10 +384,11 @@
 
     @@-webkit-keyframes sideWays {
         0% {
-            margin-left:0px;
+            margin-left: 0px;
         }
+
         100% {
-            margin-left:50px;
+            margin-left: 50px;
         }
     }
 
@@ -385,6 +411,7 @@
             margin-left: 50px;
         }
     }
+
     @@-o-keyframes moveclouds {
         0% {
             top: 110vh;
@@ -403,5 +430,5 @@
         100% {
             margin-left: 50px;
         }
-}
+    }
 </style>

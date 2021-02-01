@@ -3,6 +3,9 @@
 $large-screen: 1700px;
 $large-screen-image-size: 520px;
 
+$small-screen-size: 775px;
+$small-screen-image-size: 70vw;
+
 .menu-item {
     display: inline-block;
     margin: 15px;
@@ -10,14 +13,8 @@ $large-screen-image-size: 520px;
     height: $image-size;
     vertical-align: middle;
 
-    a, form {
+    button, form {
         height: 100%;
-
-        a .title {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
 
         .title {
             span {
@@ -30,6 +27,8 @@ $large-screen-image-size: 520px;
             display: inline-block;
             width: 100%;
             height: 100%;
+            padding: 0;
+            border: 0;
         }
 
         img {
@@ -46,10 +45,30 @@ $large-screen-image-size: 520px;
         width: $large-screen-image-size;
         height: $large-screen-image-size;
 
-        a {
+        button {
             img {
                 width: $large-screen-image-size;
                 height: $large-screen-image-size;
+            }
+        }
+    }
+}
+
+@media (max-width: $small-screen-size) {
+    .menu-item {
+        width: $small-screen-image-size;
+        height: $small-screen-image-size;
+
+        button {
+            img {
+                width: $small-screen-image-size;
+                height: $small-screen-image-size;
+            }
+
+            .title {
+                span {
+                    font-size: 18vw;
+                }
             }
         }
     }

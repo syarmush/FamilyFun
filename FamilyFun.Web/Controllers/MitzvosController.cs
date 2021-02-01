@@ -38,34 +38,29 @@ namespace FamilyFun.Web.Controllers
         [HttpPost("")]
         public async Task<IActionResult> AddMitzvah([FromForm]int familyMemberId, [FromForm]int mitzvahId)
         {
-            FamilyMember member = _familyMembersRetriever.RetrieveFamilyMembers(m => m.Id == familyMemberId).Single();
-            Mitzvah mitzvah = _mitzvosRetriever.RetrieveMitzvos(m => m.Id == mitzvahId).Single();
-
+            if (await _mitzvahRepository.MemberHasMitzvahForDate(familyMemberId, mitzvahId, DateTime.Today))
+            {
+                ModelState.AddModelError("mitzvahId", "Mitzvah already exists");
+            }
 
             if (ModelState.IsValid)
             {
+                FamilyMember member = _familyMembersRetriever.RetrieveFamilyMembers(m => m.Id == familyMemberId).Single();
+                Mitzvah mitzvah = _mitzvosRetriever.RetrieveMitzvos(m => m.Id == mitzvahId).Single();
+
                 ViewBag.PageColors = _colorDeterminer.DeterminePageBackgroundColors();
-                await _mitzvahRepository.LogMitzvahAsync(mitzvahId, familyMemberId, mitzvah.Points);
-                return View(new AddMitzvahResult(member.Name, mitzvah.Points));
+                await _mitzvahRepository.LogMitzvahPointsForDateAsync(familyMemberId, mitzvahId, DateTime.Today, mitzvah.Points);
+
+                return View(new AddMitzvahResult(member.Id, member.Name, mitzvah.Points));
             }
 
-            return RedirectToAction(nameof(Index), new { familyMemberId });
-        }
-
-        [HttpGet("Prizes/{id}")]
-        public async Task<IActionResult> Prizes([FromRoute] int id, [FromServices]IMemberPrizeRetriever prizeRetriever)
-        {
-            ViewBag.PageColors = _colorDeterminer.DeterminePageBackgroundColors();
-            int points = (await _mitzvahRepository.RetriveMitzvosAsync(id)).Sum(m => m.Points);
-            FamilyMember member = _familyMembersRetriever.RetrieveFamilyMembers(m => m.Id == id).Single();
-
-            return View(new PrizeResult(member, points, prizeRetriever.RetrieveByFamilyMemberId(id)));
+            return Index(familyMemberId);
         }
 
         [HttpGet("Archive/{id}")]
         public async Task<IActionResult> ViewLoggedMitzvos([FromRoute] int id)
         {
-            return new ObjectResult(await _mitzvahRepository.RetriveMitzvosAsync(id));
+            return new ObjectResult(await _mitzvahRepository.RetrieveAllMitzvahOccurencesAsync(id));
         }
     }
 }

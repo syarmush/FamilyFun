@@ -54,25 +54,22 @@ namespace FamilyFun.Persistance
             _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
         }
 
-        public Task<ICollection<TEntity>> RetrievePersistedDataAsync()
+        public async Task<ICollection<TEntity>> RetrievePersistedDataAsync()
         {
-            IFormatter formatter = new BinaryFormatter();
-
             if (!File.Exists(_filePath))
             {
-                using Stream newFileStream = File.OpenWrite(_filePath);
                 ICollection<TEntity> enities = new List<TEntity>();
-                formatter.Serialize(newFileStream, enities);
-                return Task.FromResult(enities);
+                await PersistAsync(enities);                
+                return enities;
             }
 
+            IFormatter formatter = new BinaryFormatter();
             using Stream stream = File.OpenRead(_filePath); 
-            return Task.FromResult((ICollection<TEntity>)formatter.Deserialize(stream));
+            return (ICollection<TEntity>)formatter.Deserialize(stream);
         }
 
         public Task PersistAsync(ICollection<TEntity> entities)
         {
-
             using Stream stream = File.OpenWrite(_filePath);
             IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, entities);
