@@ -70,10 +70,18 @@ namespace FamilyFun.Persistance
 
         public Task PersistAsync(ICollection<TEntity> entities)
         {
-            using Stream stream = File.OpenWrite(_filePath);
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, entities);
-            return Task.CompletedTask;
+            try
+            {
+                using Stream stream = File.OpenWrite(_filePath);
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, entities);
+                return Task.CompletedTask;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
+                return PersistAsync(entities);
+            }
         }
     }
 }
