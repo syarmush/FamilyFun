@@ -1,0 +1,27 @@
+﻿@model FamilyFun.Web.Models.ViewModels.LoggedMitzvahViewModel
+
+<tr>
+    <td>
+        <span>@Model.FamilyMember.Name</span>
+    </td>
+    <td>
+        <span>@Model.Mitzvah.Name</span>
+    </td>
+    <td>
+        <span>@Model.OccuredOn.ToString("MM-dd-yyy hh:mm")</span>
+    </td>
+    <td>
+        <span>@Model.Points</span>
+    </td>
+    <td>
+        <span>@Model.ApproveOn</span>
+    </td>
+    <td>
+        <span>@Model.ApprovedBy</span>
+    </td>
+    <td class="actions">
+        <a asp-action="Approve" asp-route-id="@Model.Id"><i class="bi bi-check2"></i></a>
+        <a asp-action="Block" asp-route-id="@Model.Id"><i class="bi bi-slash-circle"></i></a>
+        <a asp-action="Delete" asp-route-id="@Model.Id"><i class="bi bi-trash"></i></a>
+    </td>
+</tr>

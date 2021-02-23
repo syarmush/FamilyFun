@@ -28,8 +28,8 @@ namespace FamilyFun.Web.Controllers
         public async Task<IActionResult> Index([FromRoute] int id, [FromServices] IMemberPrizeRetriever prizeRetriever)
         {
             ViewBag.PageColors = _colorDeterminer.DeterminePageBackgroundColors();
-            int approvedPoints = (await _mitzvahRepository.RetriveApprovedMitzvahOccurencesAsync(id)).Sum(m => m.Points);
-            int pendingPoints = (await _mitzvahRepository.RetrivePendingMitzvahOccurencesAsync(id)).Sum(m => m.Points);
+            int approvedPoints = (await _mitzvahRepository.RetrieveApprovedMitzvahOccurencesAsync(id)).Sum(m => m.Points);
+            int pendingPoints = (await _mitzvahRepository.RetrievePendingMitzvahOccurencesAsync(id)).Sum(m => m.Points);
             FamilyMember member = _familyMembersRetriever.RetrieveFamilyMembers(m => m.Id == id).Single();
             var prizeResult = new PrizeResultViewModel(member, approvedPoints, pendingPoints, prizeRetriever.RetrieveByFamilyMemberId(id), _imageDirectoryPathRetriever.RetrieveImageDirectoryPath());
 

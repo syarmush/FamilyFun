@@ -51,15 +51,15 @@ namespace FamilyFun.Web
             services.AddScoped<IMitzvosRetriever>(a =>
                 new MitzvosRetriever(new List<Mitzvah>
                 {
-                    new Mitzvah(1, "Said Modeh Ani", 10, "say-modeh-ani.jpg"),
-                    new Mitzvah(2, "Wash Negel Vasser", 5, "wash-negel-vasser.png"),
+                    new Mitzvah(1, "Said Modeh Ani", 10, "say-modeh-ani.jpg", true),
+                    new Mitzvah(2, "Wash Negel Vasser", 5, "wash-negel-vasser.png", true),
                     new Mitzvah(3, "Dress With Zrizus", 7, "get-dressed.jpg"),
                     new Mitzvah(4, "Hang Up Coat and Backpack", 7, "hang-up.jpg"),
                     new Mitzvah(5, "Homework", 10, "homework.jpg"),
                     new Mitzvah(6, "Laundry", 7, "put-laudry-away.jpg"),
                     new Mitzvah(7, "Clean Up", 7, "clean-up.jpg"),
-                    new Mitzvah(8, "Bring Negel Vaser to bed", 10, "prepare-negel-vasser.jpg"),
-                    new Mitzvah(9, "Kiss The Mezuzah", 5, "mezuzah.jpg"),
+                    new Mitzvah(8, "Bring Negel Vaser to bed", 10, "prepare-negel-vasser.jpg", true),
+                    new Mitzvah(9, "Kiss The Mezuzah", 5, "mezuzah.jpg", true),
                     new Mitzvah(10, "Say Shma Nicely", 10, "say-shema.jpg"),
                     new Mitzvah(11, "12 Pesukim", 10, "12-pesukim.jpg"),
                 }));

@@ -1,0 +1,39 @@
+﻿@model MitzvahMenuModelView
+@using FamilyFun.Web.Models.ViewModels
+
+@{
+    Layout = "_ColorfulBodyLayout";
+    await Html.RenderPartialAsync("_MenuSelectorPartial", Model.MitzvahSelectors);
+
+    await Html.RenderPartialAsync("_AdminModalOpener", new AdminModalViewModel("_MitzvahSelectorAdminModal", new MitzvahAdminViewModel(Model.FamilyMemberId)));
+}
+
+@section Scripts
+{
+    <script src="~/js/date_selector.js"></script>
+    <script>
+        var currentDate = '@DateTime.Today.ToString("yyyy-MM-dd")';
+        $('#admin-modal').on('shown.bs.modal', function () {
+            $('#mitzvahOccurances')
+                .load('@Url.Action("ViewLoggedMitzvos", "Mitzvos", new { fmId = Model.FamilyMemberId, date = DateTime.Today.ToString("yyyy-MM-dd") })', linkActions);
+        });
+        $('#mitzvahDateSelector').addDataSelector({
+            onChange: function (selectedDate) {
+                currentDate = selectedDate;
+                $('[name=MitzvahDate]').val(selectedDate);
+                $('#mitzvahOccurances').load('Admin/@Model.FamilyMemberId/' + selectedDate, linkActions);
+            },
+            defaultDate: currentDate
+        });
+        var linkActions = function () {
+            $("#loggedMitzvos .actions a").click(function (event) {
+                event.preventDefault();
+
+                $.get($(this).attr("href"))
+                    .done(function () {
+                        $('#mitzvahOccurances').load('Admin/@Model.FamilyMemberId/' + currentDate, linkActions);
+                    })
+            });
+        };
+    </script>
+}

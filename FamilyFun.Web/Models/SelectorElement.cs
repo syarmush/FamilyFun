@@ -13,10 +13,10 @@ namespace FamilyFun.Web.Models
         internal SelectorElement(ElementType get, string name, string controller, string action, string id, IPageColorDeterminer colorDeterminer)
             : this (get, name, controller, action, id, ImmutableDictionary<string, string>.Empty, colorDeterminer) { }
 
-        internal SelectorElement(ElementType type, string name, string controller, string action, string id, IDictionary<string, string> attributes, IPageColorDeterminer colorDeterminer)
+        internal SelectorElement(ElementType type, string name, string controller, string action, string id, IDictionary<string, string> defaultFields, IPageColorDeterminer colorDeterminer)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            DeflaultFields = defaultFields ?? throw new ArgumentNullException(nameof(defaultFields));
             colorDeterminer.DetermineMenuItemColors(name.Length, out string bacgroundColor, out IEnumerable<string> textColors);
             TargetAction = action ?? throw new ArgumentNullException(nameof(action));
             TargetController = controller ?? throw new ArgumentNullException(nameof(controller));
@@ -32,10 +32,10 @@ namespace FamilyFun.Web.Models
             }
         }
 
-        internal SelectorElement(ElementType type, string name, string controller, string action, string id, IDictionary<string, string> attributes, string imagePath)
+        internal SelectorElement(ElementType type, string name, string controller, string action, string id, IDictionary<string, string> defaultFields, string imagePath)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            DeflaultFields = defaultFields ?? throw new ArgumentNullException(nameof(defaultFields));
             ImagePath = imagePath ?? throw new ArgumentNullException(nameof(imagePath));
             TargetAction = action ?? throw new ArgumentNullException(nameof(action));
             TargetController = controller ?? throw new ArgumentNullException(nameof(controller));
@@ -45,7 +45,7 @@ namespace FamilyFun.Web.Models
 
         public ElementType ElementType { get;  }
         public string Name { get; }
-        public IDictionary<string,string> Attributes { get; }
+        public IDictionary<string,string> DeflaultFields { get; }
         public string TargetController { get; }
         public string TargetAction { get; }
         public string TargetId { get; }

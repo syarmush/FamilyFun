@@ -8,15 +8,15 @@ namespace FamilyFun.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IFamilyMembersSelectorElementRetriever _familyMemberSelectorRetriever;
-        private readonly IMenuItemSelectorElementRetriever _menuItemSelectorRetriver;
+        private readonly IMenuItemSelectorElementRetriever _activityMenuSelectorRetriever;
         private readonly IPageColorDeterminer _colorDeterminer;
 
         public HomeController(IFamilyMembersSelectorElementRetriever familyMemberSelectorRetriever, IPageColorDeterminer colorDeterminer,
-            IMenuItemSelectorElementRetriever menuItemSelectorRetriver)
+            IMenuItemSelectorElementRetriever activityMenuSelectorRetriever)
         {
             _familyMemberSelectorRetriever = familyMemberSelectorRetriever ?? throw new ArgumentNullException(nameof(familyMemberSelectorRetriever));
             _colorDeterminer = colorDeterminer ?? throw new ArgumentNullException(nameof(colorDeterminer));
-            _menuItemSelectorRetriver = menuItemSelectorRetriver ?? throw new ArgumentNullException(nameof(menuItemSelectorRetriver));
+            _activityMenuSelectorRetriever = activityMenuSelectorRetriever ?? throw new ArgumentNullException(nameof(activityMenuSelectorRetriever));
         }
 
         public IActionResult Index()
@@ -24,7 +24,7 @@ namespace FamilyFun.Web.Controllers
             ViewBag.PageColors = _colorDeterminer.DeterminePageBackgroundColors();
             ViewBag.Title = "Home";
 
-            return View("~/Views/Shared/MenuSelector.cshtml", _familyMemberSelectorRetriever.RetriveSelectorElements());
+            return View("FamilyMenuSelector", _familyMemberSelectorRetriever.RetriveSelectorElements());
         }
 
         [HttpGet("/Home/{id}")]
@@ -34,7 +34,7 @@ namespace FamilyFun.Web.Controllers
             ViewBag.PageColors = _colorDeterminer.DeterminePageBackgroundColors();
             ViewBag.Title = "Menu";
 
-            return View("~/Views/Shared/MenuSelector.cshtml", _menuItemSelectorRetriver.RetrieveByFamilyMemberId(id));
+            return View("ActivityMenuSelector", _activityMenuSelectorRetriever.RetrieveByFamilyMemberId(id));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

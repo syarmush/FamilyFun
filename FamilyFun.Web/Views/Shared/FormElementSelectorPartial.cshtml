@@ -5,7 +5,7 @@
 
     <form asp-controller="@Model.TargetController" asp-action="@Model.TargetAction" asp-route-id="@Model.TargetId" method="@method">
         @{
-            foreach (KeyValuePair<string, string> field in Model.Attributes)
+            foreach (KeyValuePair<string, string> field in Model.DeflaultFields)
             {
                 <input type="hidden" value="@field.Value" id="@field.Key" name="@field.Key" />
             }

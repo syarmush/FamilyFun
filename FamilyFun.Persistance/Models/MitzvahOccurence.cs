@@ -15,11 +15,13 @@ namespace FamilyFun.Persistence.Models
             Points = points;
         }
 
+        public string Id { get; set; } = null!;
         public int MitzvahId { get; }
         public int FamilyMemberId { get; }
         public DateTime OccuredOn { get; }
-        public int Points { get; }
-        public string? ApprovedBy { get; }
-        public DateTime? ApproveOn { get; }
+        public int Points { get; set; }
+        public string? ApprovedBy { get; set; }
+        public DateTime? ApproveOn { get; set; }
+
     }
 }

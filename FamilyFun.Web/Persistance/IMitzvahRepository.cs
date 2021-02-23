@@ -10,10 +10,13 @@ namespace FamilyFun.Web.Persistance
     public interface IMitzvahRepository
     {
         Task LogMitzvahPointsForDateAsync(int familyMemberId, int mitzvahId, DateTime mitzvahDate, int points);
-        Task<IEnumerable<MitzvahOccurence>> RetrieveAllMitzvahOccurencesAsync(int familyMemberId);
-        Task<IEnumerable<MitzvahOccurence>> RetrivePendingMitzvahOccurencesAsync(int familyMemberId);
-        Task<IEnumerable<MitzvahOccurence>> RetriveApprovedMitzvahOccurencesAsync(int familyMemberId);
+        Task<IEnumerable<MitzvahOccurence>> RetrieveAllMitzvahOccurencesAsync(int familyMemberId, DateTime mitzvahDate);
+        Task<IEnumerable<MitzvahOccurence>> RetrievePendingMitzvahOccurencesAsync(int familyMemberId);
+        Task<IEnumerable<MitzvahOccurence>> RetrieveApprovedMitzvahOccurencesAsync(int familyMemberId);
         Task<bool> MemberHasMitzvahForDate(int familyMemberId, int mitzvahId, DateTime mitzvahDate);
+        Task<MitzvahOccurence> RetrieveSinlgeMitzvahOccuranceAsync(string occuranceId);
+        Task UpdateAsync(MitzvahOccurence mitzvahOccurence);
+        Task DeleteSinlgeMitzvahOccuranceAsync(string id);
     }
 
 
@@ -26,17 +29,17 @@ namespace FamilyFun.Web.Persistance
             _mitzvosRepository = mitzvosRepository ?? throw new ArgumentNullException(nameof(mitzvosRepository));
         }
 
-        public Task<IEnumerable<MitzvahOccurence>> RetrieveAllMitzvahOccurencesAsync(int familyMemberId)
+        public Task<IEnumerable<MitzvahOccurence>> RetrieveAllMitzvahOccurencesAsync(int familyMemberId, DateTime mitzvahDate)
         {
-            return _mitzvosRepository.GetAllWhereAsync(m => m.FamilyMemberId == familyMemberId);
+            return _mitzvosRepository.GetAllWhereAsync(m => m.FamilyMemberId == familyMemberId && m.OccuredOn.Date == mitzvahDate.Date);
         }
 
-        public Task<IEnumerable<MitzvahOccurence>> RetrivePendingMitzvahOccurencesAsync(int familyMemberId)
+        public Task<IEnumerable<MitzvahOccurence>> RetrievePendingMitzvahOccurencesAsync(int familyMemberId)
         {
             return _mitzvosRepository.GetAllWhereAsync(m => m.FamilyMemberId == familyMemberId && m.ApproveOn == null);
         }
 
-        public Task<IEnumerable<MitzvahOccurence>> RetriveApprovedMitzvahOccurencesAsync(int familyMemberId)
+        public Task<IEnumerable<MitzvahOccurence>> RetrieveApprovedMitzvahOccurencesAsync(int familyMemberId)
         {
             return _mitzvosRepository.GetAllWhereAsync(m => m.FamilyMemberId == familyMemberId && m.ApproveOn != null);
         }
@@ -52,6 +55,21 @@ namespace FamilyFun.Web.Persistance
                 .GetAllWhereAsync(m => m.FamilyMemberId == familyMemberId && m.MitzvahId == mitzvahId && m.OccuredOn.Date == mitzvahDate.Date))
                 .Any();
                
+        }
+
+        public Task<MitzvahOccurence> RetrieveSinlgeMitzvahOccuranceAsync(string occuranceId)
+        {
+            return _mitzvosRepository.GetOneAsync(occuranceId);
+        }
+
+        public Task UpdateAsync(MitzvahOccurence mitzvahOccurence)
+        {
+            return _mitzvosRepository.UpdateAsync(mitzvahOccurence);
+        }
+
+        public Task DeleteSinlgeMitzvahOccuranceAsync(string occuranceId)
+        {
+            return _mitzvosRepository.DeleteAsync(occuranceId);
         }
     }
 }

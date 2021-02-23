@@ -1,0 +1,6 @@
+﻿@model IEnumerable<SelectorElement>
+
+@{
+    Layout = "_ColorfulBodyLayout";
+    await Html.RenderPartialAsync("_MenuSelectorPartial", Model);
+}

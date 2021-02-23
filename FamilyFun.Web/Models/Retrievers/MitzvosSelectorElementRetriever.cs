@@ -33,10 +33,11 @@ namespace FamilyFun.Web
             IEnumerable<Mitzvah> filteredItems = _items.Where(mi => _memberIdToMitzvos[familyMemberId].Contains(mi.Id));
             return filteredItems.Select(i =>
             {
-                IDictionary<string, string> attributes = new Dictionary<string, string>
+                IDictionary<string, string> mitzvahOccuranceFields = new Dictionary<string, string>
                 {
-                    ["familyMemberId"] = familyMemberId.ToString(),
-                    ["mitzvahId"] = i.Id.ToString()
+                    ["FamilyMemberId"] = familyMemberId.ToString(),
+                    ["MitzvahId"] = i.Id.ToString(),
+                    ["MitzvahDate"] = DateTime.Today.ToString("MM/dd/yy")
                 };
 
                 if (i.HasImageFile())
@@ -44,14 +45,14 @@ namespace FamilyFun.Web
                     if (!(_imageDirectoryPath is null))
                     {
                         string imagePath = Path.Combine(_imageDirectoryPath, i.ImageFileName!);
-                        return new SelectorElement(ElementType.Post, i.Name, "Mitzvos", "Index", "", attributes, imagePath);
+                        return new SelectorElement(ElementType.Post, i.Name, "Mitzvos", "Index", "", mitzvahOccuranceFields, imagePath);
                     }
 
                     throw new InvalidOperationException("No image directory path was provided");
                 }
                 else
                 {
-                    return new SelectorElement(ElementType.Post, i.Name, "Mitzvos", "Index", "", attributes, _pageColorDeterminer);
+                    return new SelectorElement(ElementType.Post, i.Name, "Mitzvos", "Index", "", mitzvahOccuranceFields, _pageColorDeterminer);
                 }
             });
         }
